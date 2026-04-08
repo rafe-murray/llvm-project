@@ -2127,16 +2127,12 @@ CIRGenFunction::emitAArch64BuiltinExpr(unsigned builtinID, const CallExpr *expr,
                      getContext().BuiltinInfo.getName(builtinID));
     return mlir::Value{};
   case NEON::BI__builtin_neon_vaddh_f16:
-    ops.push_back(emitScalarExpr(expr->getArg(1)));
     return builder.createFAdd(loc, ops[0], ops[1]);
   case NEON::BI__builtin_neon_vsubh_f16:
-    ops.push_back(emitScalarExpr(expr->getArg(1)));
     return builder.createFSub(loc, ops[0], ops[1]);
   case NEON::BI__builtin_neon_vmulh_f16:
-    ops.push_back(emitScalarExpr(expr->getArg(1)));
     return builder.createFMul(loc, ops[0], ops[1]);
   case NEON::BI__builtin_neon_vdivh_f16:
-    ops.push_back(emitScalarExpr(expr->getArg(1)));
     return builder.createFDiv(loc, ops[0], ops[1]);
   case NEON::BI__builtin_neon_vfmah_f16:
     // NEON intrinsic puts accumulator first, unlike the LLVM fma.
