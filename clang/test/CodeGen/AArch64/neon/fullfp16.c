@@ -34,6 +34,62 @@
 #include <arm_fp16.h>
 
 //===------------------------------------------------------===//
+// 2.5.1.1.  Addition
+//===------------------------------------------------------===//
+// LLVM-LABEL: @test_vaddh_f16(
+// CIR-LABEL: @test_vaddh_f16(
+float16_t test_vaddh_f16(float16_t a, float16_t b) {
+// CIR: {{%.*}} = cir.add {{%.*}}, {{%.*}} : !cir.f16
+
+// LLVM-SAME: half {{.*}} [[A:%.*]], half{{.*}} [[B:%.*]]) {{.*}} {
+// LLVM:  [[ADD:%.*]] = fadd half [[A]], [[B]]
+// LLVM:  ret half [[ADD]]
+  return vaddh_f16(a, b);
+}
+
+//===------------------------------------------------------===//
+// 2.5.10.1.  Subtraction
+//===------------------------------------------------------===//
+// LLVM-LABEL: @test_vsubh_f16(
+// CIR-LABEL: @test_vsubh_f16(
+float16_t test_vsubh_f16(float16_t a, float16_t b) {
+// CIR: {{%.*}} = cir.sub {{%.*}}, {{%.*}} : !cir.f16
+
+// LLVM-SAME: half {{.*}} [[A:%.]], half {{.*}} [[B:%.]]) {{.*}} {
+// LLVM:  [[SUB:%.*]] = fsub half [[A]], [[B]]
+// LLVM:  ret half [[SUB]]
+  return vsubh_f16(a, b);
+}
+
+//===------------------------------------------------------===//
+// 2.5.9.1.  Multiplication
+//===------------------------------------------------------===//
+// LLVM-LABEL: @test_vmulh_f16(
+// CIR-LABEL: @test_vmulh_f16(
+float16_t test_vmulh_f16(float16_t a, float16_t b) {
+// CIR: {{%.*}} = cir.mul {{%.*}}, {{%.*}} : !cir.f16
+
+// LLVM-SAME: half {{.*}} [[A:%.]], half {{.*}} [[B:%.]]) {{.*}} {
+// LLVM:  [[MUL:%.*]] = fmul half [[A]], [[B]]
+// LLVM:  ret half [[MUL]]
+  return vmulh_f16(a, b);
+}
+
+//===------------------------------------------------------===//
+// 2.5.1.6.  Division
+//===------------------------------------------------------===//
+// LLVM-LABEL: @test_vdivh_f16(
+// CIR-LABEL: @test_vdivh_f16(
+float16_t test_vdivh_f16(float16_t a, float16_t b) {
+// CIR: {{%.*}} = cir.div {{%.*}}, {{%.*}} : !cir.f16
+
+// LLVM-SAME: half {{.*}} [[A:%.]], half {{.*}} [[B:%.]]) {{.*}} {
+// LLVM:  [[DIV:%.*]] = fdiv half [[A]], [[B]]
+// LLVM:  ret half [[DIV]]
+  return vdivh_f16(a, b);
+}
+
+//===------------------------------------------------------===//
 // 2.5.2.1.  Bitwise equal to zero
 //===------------------------------------------------------===//
 // ALL-LABEL: test_vceqzh_f16
